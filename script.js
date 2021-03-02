@@ -2,13 +2,17 @@
 // // var finalArr = ['a', 'b', '0', '1', '!', ];
 // // finalArr = finalArr.concat(lowercaseArr)
 // // Write password to the #password input
+
+
+// Creates the command to link to the HTML file 
 var generateBtn = document.querySelector("#generate");
-console.log(generateBtn)
+// console.log(generateBtn)
 function generatePassword(){
-  return 'Hi my name is Kate'
+  return ''
 }
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+// Defines the arrays for each required text type
 var passwordText1 = [
   "a",
   "b",
@@ -93,6 +97,7 @@ var passwordSpecialCharacters = [
   "?",
   "'",
 ];
+// Defines the write password function
 function writePassword() {
   var options = passwordOptions();
   console.log(options)
@@ -104,6 +109,7 @@ function writePassword() {
 
 // var superArray = passwordText1.concat(passwordText2, passwordNumbers, passwordSpecialCharacters);
 
+// This is where the magic happens. This is where I create the nested "if" statements to generate pulling the numbers from the four different arrays. The function "generatePassword" calls from the 5 arrays, passwordLength, lowercase, uppercase, numbers, and special to create a password.
 function generatePassword(
   passwordLength,
   lowercase,
@@ -112,6 +118,7 @@ function generatePassword(
   special
 ) {
  var password = ""
+//  This variable combines all of the arrays into one array when the user confirms the selection of using that array. If one of the arrays is not chosem, it's not included in the outputted password.
  var superArray = []
   if (special){
     superArray = superArray.concat(passwordSpecialCharacters)
@@ -125,21 +132,27 @@ function generatePassword(
   if (uppercase){
     superArray = superArray.concat(passwordText2)
   }
- 
-
+  
+  
   for (var i = 0; i < passwordLength; i++) {
-      password += getRandomItem(superArray)
+    password += getRandomItem(superArray)
     
   }
   
-  // return "Hello I am the password for placeholder"
-    console.log(passwordOptions);
-  // }
-
-  console.log("Password text insert here");
+  // console.log(passwordOptions);
+  
   return password;
 }
-
+// Retrieve a random item from the provided array and this defines the function of "getRandomItem"
+function getRandomItem(arr) {
+  // Generate a random index from 0 to the Length -1 of our array
+  var randomIndex = Math.random() * arr.length;
+  // round down our random index
+  randomIndex = Math.floor(randomIndex);
+  // returning the random item based off of our random index
+  return arr [randomIndex];
+}
+// This section is how the browser collects the user data. Creating a series of prompts so that the user can either confirm or cancel which types of characters they need to use in their password
 function passwordOptions() {
   var passwordLength = prompt(
     "How long do you want your password to be? Password must be between 8 and 128 characters long."
@@ -154,7 +167,7 @@ function passwordOptions() {
   var passwordSpecialCharacters = confirm(
     "Password must include special characters"
   );
-  console.log(passwordSpecialCharacters);
+  // console.log(passwordSpecialCharacters);
   return {
     length: passwordLength,
     uppercase: passwordUppercase,
@@ -164,15 +177,6 @@ function passwordOptions() {
   }
 }
 
-// Retrieve a random item from the provided array
-function getRandomItem(arr) {
-  // Generate a random index from 0 to the Length -1 of our array
-  var randomIndex = Math.random() * arr.length;
-  // round down our random index
-  randomIndex = Math.floor(randomIndex);
-  // returning the random item based off of our random index
-  return arr [randomIndex];
-}
 
 // console.log(getRandomItem(shelter.dogs))
 
